@@ -9,11 +9,6 @@ const Home = () => {
 	const [tarea, setTarea] = useState("");
 	const [listaTareas, setListaTareas] = useState([])
 
-	const handleTarea = (e) => {
-		setTarea(e.target.value);
-		console.log(tarea);
-	}
-
 	const handleSubmit = (e) => {
 		if (e.key === 'Enter') {
 			setListaTareas(listaTareas.concat(tarea));
@@ -22,27 +17,19 @@ const Home = () => {
 		}
 	}
 
-	const deleteTask = (item) => {
-		const newArr = listaTareas.filter((param, i) => i != item);
-		setListaTareas(newArr);
+	const deleteTask = (tarea) => {
+		const neArray = listaTareas.filter((item) => item != tarea);
+		setListaTareas(neArray);
 	}
 
-	const tareaHTML = listaTareas.map((task, index)=> {
-		return (
-			<li key={index}>
-				{task}
-				<span onClick={() => deleteTask(index)}>x</span>
-			</li>
-		)
-	}) 
 
 	return (
-		<div className="container">
+		<div className="container border border-dark ">
 			<form>
 				<h1>TO DO LIST</h1>
-				<input type="text" placeholder="What needs to be done?" onChange={handleTarea} value={tarea} onKeyDown={handleSubmit}/>
+				<input type="text" placeholder="What needs to be done?" onChange={(e) => setTarea(e.target.value)} value={tarea} onKeyDown={handleSubmit}/>
 				<div>
-					<ul>{tareaHTML}</ul>
+					<ul>{listaTareas.map((item, i) => <li key= {i}>{item} <span onClick={() => deleteTask(item)} >X</span> </li>)}</ul>
 				</div>
 			</form>
 		</div>
