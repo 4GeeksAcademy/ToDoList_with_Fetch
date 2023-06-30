@@ -8,6 +8,7 @@ const Home = () => {
 
 	const [tarea, setTarea] = useState("");
 	const [listaTareas, setListaTareas] = useState([])
+	const [item, setItem] = useState ("")
 
 	const handleSubmit = (e) => {
 		if (e.key === 'Enter') {
@@ -22,14 +23,24 @@ const Home = () => {
 		setListaTareas(neArray);
 	}
 
+	const itemLeft = () => {
+		let total = listaTareas.length
+		setItem(total)
+
+		console.log(total);
+	}
+
 
 	return (
-		<div className="container border border-dark ">
-			<form>
-				<h1>TO DO LIST</h1>
+		<div className="container principal">
+			<div className="titulo"><h1>TO DO LIST</h1></div>
+			<form className="border border-dark"> 
 				<input type="text" placeholder="What needs to be done?" onChange={(e) => setTarea(e.target.value)} value={tarea} onKeyDown={handleSubmit}/>
+				<div className="lista">
+					<ul>{listaTareas.map((item, i) => <li key= {i}>{item} <span className="equis" onClick={() => deleteTask(item)} style={{cursor: "pointer"}}>X</span> </li>)}</ul>
+				</div>
 				<div>
-					<ul>{listaTareas.map((item, i) => <li key= {i}>{item} <span onClick={() => deleteTask(item)} >X</span> </li>)}</ul>
+					<span onChange={() => itemLeft}>{listaTareas.length + item} Items Left</span>
 				</div>
 			</form>
 		</div>

@@ -10,3 +10,59 @@
     import 'relative/path/to/stylesheet.scss';
 
 */
+body {
+    background: #d5def5;
+}
+
+.principal {
+    border: solid 1px purple;
+    border-radius: 20px;
+    width: 500px;
+    margin: 100px auto;
+    padding: 20px;
+    background: #430f58 ;
+}
+
+.titulo {
+    display: flex;
+    justify-content: center;
+}
+
+.titulo h1 {
+    font-size: 50px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: white;
+}
+
+input {
+    width: 456px;
+    background: #8594e4;
+    border: solid 2px purple;
+    height: 40px;
+    border-radius: 20px;
+    color: #fff;
+    padding: 20px;
+}
+
+::placeholder {
+    color: white;
+    font-weight: 10px;
+}
+
+.lista {
+    color: white;
+    background-color: #8594e4;
+    margin: 20px;
+    border-radius: 10px;
+    width: 410px;
+}
+
+.lista li {
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    padding: 10px;
+    border-bottom: solid 1px purple;
+}
+
+
