@@ -34,12 +34,12 @@ const Home = () => {
 	return (
 		<div className="container principal">
 			<div className="titulo"><h1>TO DO LIST</h1></div>
-			<form className="border border-dark"> 
+			<form className=""> 
 				<input type="text" placeholder="What needs to be done?" onChange={(e) => setTarea(e.target.value)} value={tarea} onKeyDown={handleSubmit}/>
 				<div className="lista">
 					<ul>{listaTareas.map((item, i) => <li key= {i}>{item} <span className="equis" onClick={() => deleteTask(item)} style={{cursor: "pointer"}}>X</span> </li>)}</ul>
 				</div>
-				<div>
+				<div className="items">
 					<span onChange={() => itemLeft}>{listaTareas.length + item} Items Left</span>
 				</div>
 			</form>
