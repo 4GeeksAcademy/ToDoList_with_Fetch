@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 //include images into your bundle
 // import rigoImage from "../../img/rigo-baby.jpg";
@@ -30,6 +30,78 @@ const Home = () => {
 		console.log(total);
 	}
 
+	// 1. Crear usuario
+
+		function createUser() {
+			fetch("https://assets.breatheco.de/apis/fake/todos/user/angelica_zambrano", {
+				method: "POST",
+				header: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify([]),
+			})
+			.then((response) => response.json())
+			.then((data => console.log(data)))
+			.catch((error) => console.log(error))
+		}
+
+	// 2. Lista de tareas
+		const traerListTarea = () => {
+			fetch("https://assets.breatheco.de/apis/fake/todos/user/angelica_zambrano", {
+				method: "GET",
+			})
+			.then((response) => {
+				if (response.status === 400) {
+					createUser()
+				};
+				return response.json()
+			})
+			.then((data => setListaTareas(data)))
+			.catch((error) => console.log(error))
+		}
+
+		// 3. Actualizar Tarea
+
+			const actualizarTarea = () => {
+				fetch("https://assets.breatheco.de/apis/fake/todos/user/angelica_zambrano", {
+					method: "PUT",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify(listaTareas)
+				})
+				.then((response) => response.json())
+				.then((data) => console.log(data))
+				.catch((error) => console.log(error))
+			}
+		
+		// 4. Borrar Contacto
+
+			const deleteUser = () => {
+				fetch("https://assets.breatheco.de/apis/fake/todos/user/angelica_zambrano", {
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json"
+					},
+				})
+				.then((response) => response.json())
+				.then((data) => console.log(data))
+				.catch((error) => console.log(error))
+			}
+
+
+		useEffect(() => {
+			traerListTarea()
+		}, [])
+
+		useEffect(() => {
+			if(listaTareas.length != 0){
+				actualizarTarea()
+			}
+		},[listaTareas])
+
+
+
 
 	return (
 		<div className="container principal">
@@ -43,6 +115,9 @@ const Home = () => {
 					<span onChange={() => itemLeft}>{listaTareas.length + item} Items Left</span>
 				</div>
 			</form>
+			<button className="btn btn-danger mt-2" onClick={deleteUser}>
+				Eliminar Todo
+			</button>
 		</div>
 	);
 };
